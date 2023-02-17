@@ -13,7 +13,7 @@ userBase = {} # [City, CountryCode] for each user
 
 @bot.message_handler(commands=['set_city'])
 def ask_city(message):
-    done = False
+    # done = False
     bot.send_message(message.chat.id, "👉Send a message containing your city and country (for example: Moscow, RU): ")
     if regex_check(message.text) == True:
         bot.register_next_step_handler(message, set_city)
