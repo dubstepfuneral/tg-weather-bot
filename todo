@@ -1,0 +1,8 @@
+on weather output make do emojis depending on the output of the api
+make it so you can actually reply when you make a regex mistake
+
+
+
+
+
+for some reason the bot thinks that /set_city is the answer to set_city() handler
