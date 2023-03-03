@@ -2,4 +2,5 @@ apikeys.py
 *.txt
 test.py
 __pycache__/*
-tutorial.db
+todo
+database.py

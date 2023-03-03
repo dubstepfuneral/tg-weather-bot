@@ -11,6 +11,5 @@ def get_current_weather(city, countryCode):
 
 
 def regex_check(string):
-    print(string)
     pattern = re.compile(r"^[A-Za-z]+, [A-Za-z][A-Za-z]$", re.IGNORECASE) # setting a regex that matches for example: "Moscow, RU"
     return bool(pattern.match(string))
