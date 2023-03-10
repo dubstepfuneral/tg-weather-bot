@@ -1,5 +1,3 @@
 on weather output make do emojis depending on the output of the api
-make it so you can actually reply when you make a regex mistake
 
-
-
+fix get_weather func for sql

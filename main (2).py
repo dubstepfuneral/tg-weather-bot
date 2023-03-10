@@ -4,10 +4,36 @@ from logic import *
 from iso3166 import countries
 import apikeys
 import sqlite3 as sql
+import logging
 
 bot = TeleBot(token=apikeys.bot_key)
 
-DEFAULT_CITY = "Moscow"
+logging.basicConfig(
+    format="%(asctime)s => %(filename)s => %(levelname)s => %(message)s",
+    level=logging.INFO,
+    datefmt="%Y-%m-%d %H:%M:%S",
+    filename="logs.txt"
+)
+
+main_formatter = logging.Formatter("%(asctime)s => %(filename)s => %(levelname)s => %(message)s")
+
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+console.setFormatter(main_formatter)
+
+file_handler = logging.FileHandler(filename="important.log")
+file_handler.setLevel(logging.ERROR)
+file_handler.setFormatter(main_formatter)
+
+
+root_logger = logging.getLogger("")
+
+root_logger.addHandler(console)
+root_logger.addHandler(file_handler)
+
+
+
+DEFAULT_CITY = "Moscow, RU"
 userBase = {} # [City, CountryCode] for each user
 # to replace later with sql when we learn it lmao
 
@@ -39,6 +65,7 @@ def ask_city(message):
     # done = False
     bot.send_message(message.chat.id, "👉Send a message containing your city and country (for example: Moscow, RU): ")
     bot.register_next_step_handler(message, set_city)
+    print(message.chat.id)
 
 def set_city(message):
     if regex_check(message.text) == True: # Moscow, RU
