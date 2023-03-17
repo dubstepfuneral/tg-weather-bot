@@ -1,3 +1,4 @@
+import telebot
 from telebot import TeleBot
 from telebot import types
 from logic import *
@@ -38,7 +39,7 @@ userBase = {} # [City, CountryCode] for each user
 # to replace later with sql when we learn it lmao
 
 
-def get_user_city(chat_id):
+def get_user_city(chat_id: int) -> str:
     connection = sql.connect('database.db')
     cursor = connection.cursor()
     cursor.execute("SELECT city from user_cities WHERE chat_id = (?)", (chat_id,))
@@ -46,7 +47,7 @@ def get_user_city(chat_id):
     return city if city else DEFAULT_CITY
 
 
-def set_user_loc(chat_id, city):
+def set_user_loc(chat_id, city: str) -> None:
     connection = sql.connect('database.db')
     cursor = connection.cursor()
 
@@ -61,28 +62,32 @@ def set_user_loc(chat_id, city):
 
 
 @bot.message_handler(commands=['set_city'])
-def ask_city(message):
+def ask_city(message: telebot.types.Message) -> None:
     # done = False
     bot.send_message(message.chat.id, "👉Send a message containing your city and country (for example: Moscow, RU): ")
     bot.register_next_step_handler(message, set_city)
     print(message.chat.id)
 
-def set_city(message):
+def set_city(message: telebot.types.Message) -> None:
     if regex_check(message.text) == True: # Moscow, RU
         bot.send_message(message.chat.id, f"✨'{message.text}' set!")
         set_user_loc(int(message.chat.id), str(message.text))
     else:
         by_regex(message)
 
-def by_regex(message): # if the city sent by user is incorrect by regex
+def by_regex(message: telebot.types.Message) -> None: # if the city sent by user is incorrect by regex
     bot.send_message(message.chat.id, f"😔What you've sent us does not follow the example, try again")
     ask_city(message)
 
 
 
 @bot.message_handler(commands=['get_weather'])
-def get_weather(message):
-    weather = get_current_weather(userBase[message.chat.id][0], userBase[message.chat.id][1])
+def get_weather(message: telebot.types.Message) -> None:
+    cityFromDB = get_user_city(message.chat.id)[0] # ex. Moscow, RU
+    splitString = cityFromDB.split(', ')
+    city = splitString[0]
+    countryCode = splitString[1]
+    weather = get_current_weather(city, countryCode)
     bot.send_message(message.chat.id, weather)
 
 

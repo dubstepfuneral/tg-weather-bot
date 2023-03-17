@@ -1,3 +1,5 @@
-on weather output make do emojis depending on the output of the api
+structure weather output
 
-fix get_weather func for sql
+make user info output command
+
+make command buttons
