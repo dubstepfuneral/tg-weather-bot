@@ -1,6 +1,5 @@
 import telebot
 from telebot import TeleBot
-from telebot import types
 from logic import *
 from iso3166 import countries
 import apikeys
@@ -33,7 +32,6 @@ root_logger.addHandler(console)
 root_logger.addHandler(file_handler)
 
 
-
 DEFAULT_CITY = "Moscow, RU"
 userBase = {} # [City, CountryCode] for each user
 # to replace later with sql when we learn it lmao
@@ -47,7 +45,7 @@ def get_user_city(chat_id: int) -> str:
     return city if city else DEFAULT_CITY
 
 
-def set_user_loc(chat_id, city: str) -> None:
+def set_user_loc(chat_id: int, city: str) -> None:
     connection = sql.connect('database.db')
     cursor = connection.cursor()
 
@@ -70,6 +68,8 @@ def ask_city(message: telebot.types.Message) -> None:
 
 def set_city(message: telebot.types.Message) -> None:
     if regex_check(message.text) == True: # Moscow, RU
+        if city_check(message.text) == False:
+            by_existence(message)
         bot.send_message(message.chat.id, f"✨'{message.text}' set!")
         set_user_loc(int(message.chat.id), str(message.text))
     else:
@@ -78,6 +78,19 @@ def set_city(message: telebot.types.Message) -> None:
 def by_regex(message: telebot.types.Message) -> None: # if the city sent by user is incorrect by regex
     bot.send_message(message.chat.id, f"😔What you've sent us does not follow the example, try again")
     ask_city(message)
+
+def by_existence(message: telebot.types.Message) -> None: # if the location sent by user doesn't exist
+    bot.send_message(message.chat.id, f"😔Apparently, this location doesn't exist, try again")
+    ask_city(message)
+
+
+@bot.message_handler(regexp="^[A-Za-z]+, [A-Za-z][A-Za-z]$")
+def weather_by_message(message: telebot.types.Message) -> None:
+    splitString = message.text.split(', ')
+    city = splitString[0]
+    countryCode = splitString[1]
+    weather = get_current_weather(city, countryCode)
+    bot.send_message(message.chat.id, weather)
 
 
 
@@ -89,6 +102,16 @@ def get_weather(message: telebot.types.Message) -> None:
     countryCode = splitString[1]
     weather = get_current_weather(city, countryCode)
     bot.send_message(message.chat.id, weather)
+
+
+def city_check(userCity) -> bool: # checking whether or not the city sent by user exists
+    splitString = userCity.split(', ')
+    city = splitString[0]
+    countryCode = splitString[1]
+    if get_current_weather(city, countryCode) == "City not found": 
+        return False
+    else:
+        return True
 
 
 bot.polling()
