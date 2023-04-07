@@ -1,2 +1,3 @@
 2023-03-10 20:41:29,436 => logging_setup.py => CRITICAL => something
 2023-03-10 20:42:46,827 => logging_setup.py => CRITICAL => something
+2023-04-07 19:52:16,983 => __init__.py => ERROR => A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: group chat was upgraded to a supergroup chat

@@ -23,7 +23,7 @@ def get_current_weather(city: str, countryCode: str) -> str:
     
     
     
-    result = f"""Weather in {city} now:
+    result = f"""Weather in {city.capitalize()} now:
 {emojiWeather}{styledDesc}
 🌡{temp}"""
     return result
