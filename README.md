@@ -12,7 +12,7 @@ It's currently in beta since it is still relatively raw, so there is room for im
 - **TeleBot** - python-telegram integration library *(3rd party library)*
 - **SQLite3** - database integration library for saving users' locations
 - **Logging** - library for logging errors
-- **Indexes** - to check whether or not the user is sending the right thing
+- **Indexes (re)** - to check whether or not the user is sending the right thing
 
 ## TO-DO
 Things to be done:
@@ -21,7 +21,6 @@ Things to be done:
 3. Command for user output.
 
 ## Deployment
-**NOTE: You have to get your own API keys from BotFather (Telegram) and OpenWeatherMap, about that a bit later**
 
 1. Clone the main branch to your local PC.
 2. Create a telegram bot with BotFather in Telegram, get an API key
