@@ -22,7 +22,7 @@ Things to be done:
 
 ## Deployment
 
-1. Clone the main branch to your local PC.
+1. Clone the main branch to a folder on your PC.
 2. Create a telegram bot with BotFather in Telegram, get an API key
 3. [Create an OpenWeatherMap account](https://home.openweathermap.org/users/sign_in), [create & get an API key](https://home.openweathermap.org/api_keys)
 4. In the folder with the repository, create a file and call it *apikeys.py*
