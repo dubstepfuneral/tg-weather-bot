@@ -64,7 +64,6 @@ def ask_city(message: telebot.types.Message) -> None:
     # done = False
     bot.send_message(message.chat.id, "👉Send a message containing your city and country (for example: Moscow, RU): ")
     bot.register_next_step_handler(message, set_city)
-    print(message.chat.id)
 
 def set_city(message: telebot.types.Message) -> None:
     if regex_check(message.text) == True: # Moscow, RU

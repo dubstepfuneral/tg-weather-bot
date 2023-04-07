@@ -35,16 +35,16 @@ def regex_check(string: str) -> bool:
 
 
 def getEmojiByDescription(desc: str) -> str: # styling
-    if desc in emojiDictionary:
-        emojiDictionary = {"clear sky": "☀️", "few clouds": "🌤", "scattered clouds": "⛅️", "broken clouds": "⛅️", "shower rain": "🌧", "rain": "🌦", 
+    emojiDictionary = {"clear sky": "☀️", "few clouds": "🌤", "scattered clouds": "⛅️", "broken clouds": "⛅️", "shower rain": "🌧", "rain": "🌦", 
                         "thunderstorm": "⛈", "snow": "☃️", "mist": "🌫️", "overcast clouds": "☁️"}
+    if desc in emojiDictionary:
         return emojiDictionary[desc]
     else: return "🌤"
 
 def rewrittenDescription(desc: str) -> str: # styling
-    if desc in descDictionary:
-        descDictionary = {"clear sky": "Clear sky", "few clouds": "Few clouds", "scattered clouds": "Scattered clouds", "broken clouds": "Broken clouds", "shower rain": "Shower rain", "rain": "Rain", 
+    descDictionary = {"clear sky": "Clear sky", "few clouds": "Few clouds", "scattered clouds": "Scattered clouds", "broken clouds": "Broken clouds", "shower rain": "Shower rain", "rain": "Rain", 
                         "thunderstorm": "Thunderstorm", "snow": "Snowy", "mist": "Misty", "overcast clouds": "Cloudy"}
+    if desc in descDictionary:
         return descDictionary[desc]
     else:
         descStyled = desc
