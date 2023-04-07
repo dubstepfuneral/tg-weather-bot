@@ -1,4 +1,8 @@
 apikeys.py
-test.py
 *.txt
+test.py
 __pycache__/*
+database.py
+logs.txt
+important.log
+database.db
