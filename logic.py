@@ -35,11 +35,18 @@ def regex_check(string: str) -> bool:
 
 
 def getEmojiByDescription(desc: str) -> str: # styling
-    emojiDictionary = {"clear sky": "☀️", "few clouds": "🌤", "scattered clouds": "☁️", "broken clouds": "⛅️", "shower rain": "🌧", "rain": "🌦", 
-                       "thunderstorm": "⛈", "snow": "☃️", "mist": "🌫️"}
-    return emojiDictionary[desc]
+    if desc in emojiDictionary:
+        emojiDictionary = {"clear sky": "☀️", "few clouds": "🌤", "scattered clouds": "⛅️", "broken clouds": "⛅️", "shower rain": "🌧", "rain": "🌦", 
+                        "thunderstorm": "⛈", "snow": "☃️", "mist": "🌫️", "overcast clouds": "☁️"}
+        return emojiDictionary[desc]
+    else: return "🌤"
 
 def rewrittenDescription(desc: str) -> str: # styling
-    descDictionary = {"clear sky": "Clear sky", "few clouds": "Few clouds", "scattered clouds": "Cloudy", "broken clouds": "Broken clouds", "shower rain": "Shower rain", "rain": "Rain", 
-                       "thunderstorm": "Thunderstorm", "snow": "Snowy", "mist": "Misty"}
-    return descDictionary[desc]
+    if desc in descDictionary:
+        descDictionary = {"clear sky": "Clear sky", "few clouds": "Few clouds", "scattered clouds": "Scattered clouds", "broken clouds": "Broken clouds", "shower rain": "Shower rain", "rain": "Rain", 
+                        "thunderstorm": "Thunderstorm", "snow": "Snowy", "mist": "Misty", "overcast clouds": "Cloudy"}
+        return descDictionary[desc]
+    else:
+        descStyled = desc
+        descStyled[0] = descStyled[0].capitalize()
+        return descStyled
