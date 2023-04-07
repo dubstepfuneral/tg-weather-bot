@@ -2,7 +2,6 @@ apikeys.py
 *.txt
 test.py
 __pycache__/*
-todo
 database.py
 logs.txt
 important.log
