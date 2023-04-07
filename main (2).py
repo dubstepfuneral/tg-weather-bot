@@ -1,7 +1,6 @@
 import telebot
 from telebot import TeleBot
 from logic import *
-from iso3166 import countries
 import apikeys
 import sqlite3 as sql
 import logging
